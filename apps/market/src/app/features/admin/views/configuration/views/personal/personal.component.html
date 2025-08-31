@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-4">
   <div class="row">
     <div class="col">
       <h4 class="title mb-4">Personal</h4>
@@ -39,7 +39,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (user of users; track user.personalId; let i = $index) {
+              @for (user of users | paginator: paginationController; track user.personalId; let i = $index) {
                 <tr>
                   <td>{{ user.companyName }}</td>
                   <td class="text-center">{{ user.documentType }}</td>
@@ -63,6 +63,12 @@
               }
             </tbody>
           </table>
+        </div>
+        <div class="p-4 pt-0">
+          <app-paginator
+            [total]="users.length"
+            [size]="10"
+            (pagination)="paginationController = $event"></app-paginator>
         </div>
       </div>
     </div>

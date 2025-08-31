@@ -1,3 +1,4 @@
+import { PaginatorComponent, PaginatorPipe } from '@admin-core/components/commons';
 import { BsModalService, ConfirmService } from '@admin-core/services';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,10 +11,11 @@ import { PersonalRegisterComponent } from '../../components/personal-register/pe
   selector: 'app-personal',
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, YesnoPipe],
+  imports: [FormsModule, ReactiveFormsModule, YesnoPipe, PaginatorPipe, PaginatorComponent],
   providers: [PersonalService]
 })
 export class PersonalComponent implements OnInit {
+  paginationController: any = {};
   keywords: FormControl;
   users: any[];
   isLoading: boolean;
