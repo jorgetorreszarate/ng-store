@@ -1,0 +1,43 @@
+.modal {
+  font-size: 0.9em;
+
+  .modal-dialog {
+    max-width: 450px;
+  }
+  .modal-header {
+    border-bottom: 0;
+  }
+  .modal-title {
+    color: var(--bs-primary);
+  }
+  .modal-footer {
+    border: 0;
+    background-color: #f5f5f5;
+  }
+  .close {
+    font-weight: 300;
+    font-size: 2rem;
+  }
+}
+
+.form-control {
+  font-size: 0.9rem;
+}
+.form-control,
+.form-control:focus {
+  box-shadow: none;
+}
+.form-control,
+.input-group > .input-group-text {
+  border: 0;
+  background-color: #f8f8f8;
+}
+.input-group > .input-group-text {
+  color: var(--color-success);
+}
+.btn-light {
+  border-color: #f8f8f8;
+}
+.img-fluid {
+  object-fit: contain;
+}

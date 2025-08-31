@@ -1,0 +1,35 @@
+<div
+  #wrapper
+  class="wrapper">
+  @if (!limit().left) {
+    <div
+      class="directional_left"
+      (click)="goToLeft()">
+      @if (directionals()) {
+        <i class="bx bx-left-arrow-alt"></i>
+      }
+    </div>
+  }
+
+  <div
+    #carousel
+    class="carousel_wrapper"
+    [style.minHeight]="minHeight()"
+    dragScroll
+    (extremes)="limit.set($event)"
+    wheel
+    [wheelEnable]="wheelEnable()"
+    (onWheel)="onWheel($event)">
+    <ng-content></ng-content>
+  </div>
+
+  @if (!limit().right) {
+    <div
+      class="directional_right"
+      (click)="goToRight()">
+      @if (directionals()) {
+        <i class="bx bx-right-arrow-alt"></i>
+      }
+    </div>
+  }
+</div>

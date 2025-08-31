@@ -1,0 +1,61 @@
+<div
+  class="input_wrapper"
+  clickOut
+  (outside)="show.set(false)">
+  <div
+    class="form-select"
+    [ngClass]="options()?.css"
+    tabindex="-1"
+    [class.pe-none]="disabled()"
+    [class.is-invalid]="control.touched && control.errors"
+    (click)="showOptions()">
+    {{ _value()?.label || placeholder() || "&nbsp;" }}
+  </div>
+  <div
+    class="content-lazy shadow"
+    [class.d-none]="!show()">
+    <div class="area-config">
+      <ng-content></ng-content>
+      <div class="px-3 py-2">
+        <input
+          #inputSearch
+          type="text"
+          class="form-control form-control-sm border-0 border-bottom px-0 rounded-0 shadow-none"
+          placeholder="Buscar..."
+          [formControl]="searchControl" />
+      </div>
+    </div>
+
+    <div
+      #perfectScroll
+      perfectScrollbar
+      class="results"
+      [class.loading]="isLoading()">
+      @if (empty()) {
+        <div
+          class="option"
+          (click)="optionSelected(null)"
+          tabindex="-1">
+          {{ empty() }}
+        </div>
+      }
+      @for (option of filtered(); track $index) {
+        <div
+          class="option"
+          (click)="optionSelected(option)"
+          tabindex="-1"
+          [class.selected]="option[bindValue()] == _value()?.value">
+          <span [innerHtml]="option._label || option[bindLabel()]"></span>
+        </div>
+      } @empty {
+        <div class="px-2 py-4 text-center text-muted small">
+          @if (!isLoading()) {
+            <i class="bx bx-search-alt bx-lg"></i>
+            <br />
+            Escribe un texto para buscar
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

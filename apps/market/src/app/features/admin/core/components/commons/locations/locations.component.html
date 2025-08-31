@@ -1,0 +1,40 @@
+<div
+  class="row g-2"
+  [formGroup]="form">
+  <div class="col-md-4 mb-3">
+    <label class="form-label">Departamento</label>
+    <select
+      class="form-select"
+      formControlName="IdDepartamento"
+      (change)="departamentChange()">
+      <option [value]="null">- Seleccione -</option>
+      @for (item of departaments; track $index) {
+        <option [value]="item.IdDepartamento">{{ item.Nombre }}</option>
+      }
+    </select>
+  </div>
+  <div class="col-md-4 mb-3">
+    <label class="form-label">Provincia</label>
+    <select
+      class="form-select"
+      formControlName="IdProvincia"
+      (change)="provinceChange()">
+      <option [value]="null">- Seleccione -</option>
+      @for (item of provinces; track $index) {
+        <option [value]="item.IdProvincia">{{ item.Nombre }}</option>
+      }
+    </select>
+  </div>
+  <div class="col-md-4 mb-3">
+    <label class="form-label">Distrito</label>
+    <select
+      class="form-select"
+      formControlName="IdDistrito"
+      (change)="districtChange()">
+      <option [value]="null">- Seleccione -</option>
+      @for (item of districts; track $index) {
+        <option [value]="item.IdDistrito">{{ item.Nombre }}</option>
+      }
+    </select>
+  </div>
+</div>

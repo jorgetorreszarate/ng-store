@@ -1,0 +1,35 @@
+<svg
+  class="progress__circle"
+  [attr.viewBox]="'0 0 ' + diameter() + ' ' + diameter()"
+  [attr.width]="diameter()"
+  [attr.height]="diameter()">
+  <circle
+    class="progress__meter"
+    fill="none"
+    stroke="#e6e6e6"
+    [attr.cx]="diameter() / 2"
+    [attr.cy]="diameter() / 2"
+    [attr.r]="radius()"
+    [attr.stroke-width]="stroke()" />
+  <circle
+    class="progress__value"
+    fill="none"
+    [attr.stroke]="color()"
+    stroke-linecap="round"
+    [attr.cx]="diameter() / 2"
+    [attr.cy]="diameter() / 2"
+    [attr.r]="radius()"
+    [attr.stroke-width]="stroke()"
+    [attr.stroke-dasharray]="circumference()"
+    [attr.stroke-dashoffset]="dashoffset()" />
+  <text
+    x="50%"
+    y="50%"
+    text-anchor="middle"
+    [attr.stroke]="color()"
+    stroke-width="0.1px"
+    dy=".3em"
+    font-size="18">
+    {{ text() }}
+  </text>
+</svg>

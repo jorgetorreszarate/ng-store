@@ -1,0 +1,15 @@
+<div
+  class="img-container img-loading"
+  [style.width.px]="width()"
+  [style.height.px]="height()"
+  [ngClass]="position()">
+  @if (src()) {
+    <img
+      [src]="src()"
+      alt=""
+      (load)="load($event)"
+      (error)="error($event)"
+      [style.max-width.px]="maxWidth()"
+      [style.max-height.px]="maxHeight()" />
+  }
+</div>

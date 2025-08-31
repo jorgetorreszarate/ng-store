@@ -1,0 +1,11 @@
+<div class="input-wrapper">
+  <div class="input-currency text-muted fs-6">
+    {{ currency() | currency }}
+  </div>
+  <input
+    type="number"
+    class="form-control text-end"
+    [class.form-control-lg]="size() == 'lg'"
+    [class.is-invalid]="control.touched && control.errors"
+    [formControl]="control" />
+</div>

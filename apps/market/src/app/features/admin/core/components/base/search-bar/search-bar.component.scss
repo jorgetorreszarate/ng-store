@@ -1,0 +1,118 @@
+.check-item {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  &.selected {
+    color: var(--bs-primary);
+
+    &::after {
+      position: absolute;
+      content: "";
+      bottom: -5px;
+      left: 0;
+      height: 2px;
+      width: 60px;
+      border-radius: 0.5rem;
+      background-color: var(--bs-primary);
+    }
+  }
+}
+
+.results-container {
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: 0;
+  width: 900px;
+  max-height: calc(100vh - 85px);
+  min-height: 250px;
+  background: #fff;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 30px;
+    transform: translateY(-100%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #fff transparent;
+  }
+
+  &.alone {
+    width: 450px;
+
+    .product_list {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.sort_by {
+  font-size: 0.95em;
+
+  .form-check-inline {
+    margin-right: 0.5rem;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.results {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+
+  &.opacity {
+    opacity: 0.2;
+  }
+}
+
+.product_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  // Se aplica al ultimo item, si es impar
+  & > *:nth-last-child(1):nth-child(odd)::ng-deep > * {
+    border-bottom: none;
+  }
+}
+
+.__loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--bs-primary);
+}
+
+.btn-group.disabled .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .results-container {
+    width: calc(100vw - 75px);
+    left: -50px;
+
+    &::before {
+      content: none;
+    }
+  }
+
+  .product_list {
+    grid-template-columns: 1fr;
+  }
+}

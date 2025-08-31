@@ -1,0 +1,51 @@
+<div
+  class="results-container"
+  [class.d-none]="!isLoading && !total"
+  [class.alone]="total < 2">
+  <div
+    class="sort_by p-3 border-bottom"
+    [class.disabled]="total < 2">
+    <div class="small mb-2">Ordenar por:</div>
+    <div
+      [formGroup]="form"
+      class="d-flex gap-3">
+      @for (item of options; track $index) {
+        <div
+          class="check-item"
+          [class.selected]="form.get('sort').value == item.value"
+          (click)="setSort(item)">
+          <span>{{ item.text }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div
+    #perfectScroll
+    perfectScrollbar
+    [perfectScrollbarOptions]="{wheelPropagation: false}"
+    infinite-scroll
+    (track)="onScrollDown()"
+    class="results"
+    [class.opacity]="isLoading">
+    <div class="product_list">
+      @for (product of results; track product.IdProducto) {
+        <app-search-bar-product
+          [product]="product"
+          (selected)="select($event)" />
+      }
+    </div>
+  </div>
+
+  @if (total) {
+    <div class="p-3 border-top">
+      <span>Resultados: {{ total | number: "0.0-0" }} producto(s)</span>
+    </div>
+  }
+  @if (isLoading) {
+    <div class="__loading">
+      <i class="bx bx-loader-alt bx-spin bx-md"></i>
+      <div class="mt-2">Buscando...</div>
+    </div>
+  }
+</div>

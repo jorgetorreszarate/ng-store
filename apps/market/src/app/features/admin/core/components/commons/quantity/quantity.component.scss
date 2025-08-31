@@ -1,0 +1,68 @@
+.qty {
+  position: relative;  
+
+  .form-control {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-width: 110px;
+
+    &.is-invalid {
+      background-image: none;
+    }
+  }
+
+  .icon-weight,
+  .icon-plus,
+  .icon-minus {
+    position: absolute;
+    font-size: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ddd;
+    padding: 4px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      color: var(--bs-primary);
+    }
+  }
+
+  .icon-minus {
+    left: 5px;
+  }
+
+  .icon-weight,
+  .icon-plus {
+    right: 5px;
+  }
+
+  .icon-minus,
+  .icon-plus {
+    border-radius: 50%;
+    line-height: 1;
+    transition: 0.1s;
+
+    &:hover,
+    &:hover {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+
+    // &:active {
+    //   transform: translateY(-50%) scale(0.9);
+    // }
+  }
+
+  // Tamaño para los controles
+  &.sm {
+    .bx {
+      padding: 1px;
+    }
+  }
+
+  &.lg {
+    .bx {
+      padding: 10px;
+    }
+  }
+}

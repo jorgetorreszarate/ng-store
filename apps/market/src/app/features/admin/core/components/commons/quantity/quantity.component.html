@@ -1,0 +1,37 @@
+<div
+  class="qty"
+  [class.loading]="isLoading()"
+  [ngClass]="size()">
+  <input
+    type="number"
+    class="form-control rounded-pill text-center"
+    [class.form-control-sm]="size() == 'sm'"
+    [class.form-control-lg]="size() == 'lg'"
+    [formControl]="control"
+    [class.is-invalid]="control.errors" />
+
+  @if (!disabled()) {
+    @if (isWeight()) {
+      <i
+        class="icon-weight bx bx-collection"
+        title="Obtener peso"
+        (click)="getWeight()"></i>
+    } @else {
+      <i
+        class="icon-plus bx bx-plus"
+        [class.text-danger]="control.errors"
+        title="Incrementar"
+        long-press
+        (click)="incrementQty()"
+        (onLongPressing)="incrementQty()"></i>
+
+      <i
+        class="icon-minus bx bx-minus"
+        [class.text-danger]="control.errors"
+        title="Disminuir"
+        long-press
+        (click)="decrementQty()"
+        (onLongPressing)="decrementQty()"></i>
+    }
+  }
+</div>

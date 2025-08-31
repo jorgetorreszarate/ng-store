@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es-PE">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tienda | Plataforma de ventas</title>
+    <base href="/" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet" />
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet" /> -->
+    <!-- <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap"
+      rel="stylesheet" /> -->
+
+    <style type="text/css">
+      .page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--bs-gray-100);
+        background-image: linear-gradient(330deg, var(--bs-gray-200), var(--bs-gray-100));
+        transition: background-color ease 2s 1s;
+        z-index: 1040;
+      }
+
+      .page-loader.hidden {
+        display: none;
+      }
+
+      .loader-dual-ring {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .loader-dual-ring {
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+      }
+
+      .loader-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 3rem;
+        height: 3rem;
+        margin: 1px;
+        border-radius: 50%;
+        border: 0.3rem solid var(--bs-primary);
+        border-color: var(--bs-primary) transparent var(--bs-primary) transparent;
+        animation: loader-dual-ring 1.1s ease infinite;
+      }
+
+      @keyframes loader-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <app-root></app-root>
+    <div class="page-loader">
+      <div class="loader-dual-ring"></div>
+    </div>
+  </body>
+</html>

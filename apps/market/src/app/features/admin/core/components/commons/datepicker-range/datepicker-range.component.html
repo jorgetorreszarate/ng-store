@@ -1,0 +1,20 @@
+<div
+  class="form-control form-control-plaintext border px-3 dropdown-toggle d-flex align-items-center cursor-pointer"
+  [ngClass]="{'border-danger text-danger': control.errors}"
+  data-bs-toggle="dropdown"
+  data-bs-auto-close="outside"
+  aria-expanded="false">
+  <i class="bx bx-calendar me-2"></i>
+  @if (bsValue) {
+    {{ bsValue[0] | date: "dd/MM/yyyy" }} al {{ bsValue[1] | date: "dd/MM/yyyy" }}
+  } @else {
+    Seleccione fechas
+  }
+</div>
+
+<div class="dropdown-menu dropdown-menu-sm-start p-0 overflow-hidden">
+  <bs-daterangepicker-inline
+    [bsConfig]="bsConfig"
+    [bsValue]="bsValue"
+    (bsValueChange)="setRangePicker($event)" />
+</div>

@@ -1,0 +1,34 @@
+<div class="dropdown">
+  <div
+    class="dropdown-toggle d-flex align-items-center justify-content-between cursor-pointer"
+    data-bs-toggle="dropdown"
+    aria-expanded="false">
+    <div>
+      <h6 class="m-0 text-primary">
+        <strong>{{ itemSelected?.name || "Seleccione una opción" }}</strong>
+        <ng-content></ng-content>
+      </h6>
+      @if (itemSelected?.description) {
+        <div class="text-muted">{{ itemSelected?.description }}</div>
+      }
+    </div>
+  </div>
+
+  <div class="dropdown-menu mt-1 border-0 shadow w-100">
+    @for (item of items(); track $index; let i = $index) {
+      @if (i > 0) {
+        <div class="dropdown-divider"></div>
+      }
+      <div
+        class="dropdown-item"
+        (click)="selected(item)"
+        [class.active]="item.id == itemSelected?.id"
+        [class.disabled]="disabled()">
+        <a>
+          <h6 class="m-0">{{ item.name }}</h6>
+          <div class="small">{{ item.description }}</div>
+        </a>
+      </div>
+    }
+  </div>
+</div>

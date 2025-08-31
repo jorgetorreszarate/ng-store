@@ -1,0 +1,38 @@
+<div class="wizard">
+  <div class="wizard-navigation">
+    @for (step of steps; track $index; let i = $index) {
+    <div class="wizard-nav-item"
+         [class.active]="i <= currentStepIndex">
+      <div class="icon"
+           (click)="goToStep(i)">
+        <i [class]="step.icon"></i>
+      </div>
+      <div class="label">{{ step.label }}</div>
+      @if (i !== steps.length - 1) {
+      <div class="line"></div>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="wizard-step"
+       #stepContainer></div>
+
+  <div class="wizard-controls">
+    <button (click)="previousStep()"
+            [disabled]="currentStepIndex === 0"
+            [hidden]="currentStepIndex === 0"
+            type="button"
+            class="btn btn-primary px-5">
+      <i class="bx bx-left-arrow-alt"></i>
+      Anterior
+    </button>
+    <button (click)="nextStep()"
+            [disabled]="!componentRef || !componentRef.instance.isFormValid"
+            type="button"
+            class="btn btn-primary px-5">
+      Siguiente
+      <i class="bx bx-right-arrow-alt"></i>
+    </button>
+  </div>
+</div>

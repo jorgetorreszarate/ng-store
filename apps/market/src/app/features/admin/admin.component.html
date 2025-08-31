@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+
+<!--Container Main start-->
+<div class="app-container">
+  <router-outlet></router-outlet>
+</div>
+
+@if (offline()) {
+  <div
+    class="alert alert-warning"
+    (click)="offline.set(false)">
+    <i class="bx bx-wifi-off"></i>
+    Se ha perdido la conexión a internet
+  </div>
+}

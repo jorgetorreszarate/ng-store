@@ -1,0 +1,80 @@
+<div
+  class="sidebar"
+  [ngClass]="sidebar.isOpen() ? 'show' : 'minified'">
+  <div
+    class="sidebar_bg"
+    (click)="sidebar.close()"></div>
+  <div class="l-navbar">
+    <nav class="nav position-relative">
+      <a
+        class="nav_logo"
+        routerLink="/">
+        <i class="bx bx-store nav_logo_icon"></i>
+        <span class="nav_logo_name">
+          Galaxy Training
+        </span>
+      </a>
+
+      <ul
+        perfectScrollbar
+        class="nav_list">
+        @for (item of options(); track $index) {
+          <li
+            [class.expand]="item.expand"
+            [class.has-sub]="item.children?.length"
+            [class.nav_title]="item.separator">
+            @if (item.separator) {
+              <span>{{ item.title }}</span>
+            } @else {
+              @if (item.children?.length) {
+                <a
+                  class="nav_link"
+                  [class.active]="item.selected"
+                  (click)="toggleMenu(item)">
+                  <i
+                    class="bx nav_icon"
+                    [ngClass]="item.icon"></i>
+                  <span class="nav_name">{{ item.title }}</span>
+                </a>
+                <ul class="sub_menu">
+                  <li class="nav_subtitle">{{ item.title }}</li>
+                  @for (sub of item.children; track $index) {
+                    <li>
+                      <a
+                        [routerLink]="sub.url"
+                        [queryParams]="sub.params"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}"
+                        (click)="closeInMobile()">
+                        {{ sub.title }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <a
+                  class="nav_link"
+                  [routerLink]="item.url"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{exact: true}"
+                  (click)="closeInMobile()">
+                  <i
+                    class="bx nav_icon"
+                    [ngClass]="item.icon"></i>
+                  <span class="nav_name">{{ item.title }}</span>
+                </a>
+              }
+            }
+          </li>
+        }
+      </ul>
+
+      <a
+        class="nav_link nav_link_close"
+        (click)="signOut()">
+        <i class="bx bx-log-out-circle nav_icon"></i>
+        <span class="nav_name">Salir</span>
+      </a>
+    </nav>
+  </div>
+</div>

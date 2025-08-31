@@ -1,0 +1,69 @@
+<div
+  class="modal fade"
+  tabindex="-1"
+  aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro de personal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th class="text-center">Tipo Doc.</th>
+                <th class="text-center">N° Doc.</th>
+                <th>Personal</th>
+                <th class="text-center">Género</th>
+                <th class="text-center">Activo</th>
+                <th class="col-1"></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of users | paginator: paginatorController; track $index; let i = $index) {
+                <tr>
+                  <td>{{ user.Empresa }}</td>
+                  <td class="text-center">{{ user.TipoDocumento }}</td>
+                  <td class="text-center">{{ user.NroDocumento }}</td>
+                  <td>{{ user.Nombres }} {{ user.ApePaterno }} {{ user.ApeMaterno }}</td>
+                  <td class="text-center">{{ user.Genero }}</td>
+                  <td class="text-center">{{ user.FlagActivo | yesno }}</td>
+                  <td class="text-center">
+                    <div class="options">
+                      <i
+                        class="bx bxs-navigation"
+                        (click)="select(user)"
+                        title="Seleccionar"></i>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <app-paginator
+          [total]="users.length"
+          [size]="5"
+          [pageSizes]="[5, 10, 20, 50]"
+          (pagination)="paginatorController = $event"></app-paginator>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary rounded-pill"
+          data-bs-dismiss="modal">
+          Salir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

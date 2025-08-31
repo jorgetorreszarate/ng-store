@@ -1,0 +1,46 @@
+<a
+  class="product"
+  [routerLink]="['/inventario/registro', product().IdProducto]"
+  (click)="onSelect()">
+  <image-lazy
+    [src]="product().image"
+    width="110"
+    height="110"></image-lazy>
+  <div class="content">
+    <div class="name">{{ product().Nombre }}</div>
+    <div class="details">
+      <div class="mb-2 text-muted">{{ product().Categoria || "N/A" }}</div>
+    </div>
+
+    @if (product().Unidades) {
+      <div class="stock text-black">
+        @for (unit of product().Unidades; track unit.IdUnidadMedida; let i = $index) {
+          <div class="row align-items-center g-1 my-1">
+            <div class="col text-truncate">
+              {{ unit.UnidadMedida }}
+              @if (unit.Factor !== 1) {
+                <span>({{ unit.Factor }})</span>
+              }
+            </div>
+            <div class="col">S/ {{ unit.Precio | number: "0.2-3" }}</div>
+            <div class="col">
+              @if (product().FlagStock) {
+                @if (unit.Stock <= 0 && i == 0) {
+                  <span class="badge bg-danger">Agotado</span>
+                }
+                @if (unit.Stock) {
+                  <span
+                    class="badge bg-transparent text-dark border"
+                    title="{{ unit.UnidadMedida }}">
+                    <i class="bx bx-cube-alt text-success"></i>
+                    {{ unit.Stock | number: "0.0-3" }}
+                  </span>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</a>

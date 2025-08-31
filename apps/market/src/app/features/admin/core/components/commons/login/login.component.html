@@ -1,0 +1,105 @@
+<div
+  class="modal fade"
+  tabindex="-1"
+  aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <form
+      class="modal-content"
+      [formGroup]="form"
+      (submit)="signIn()">
+      <div
+        class="modal-header"
+        appLtDrag
+        dragHandle=".modal-title"
+        dragTarget="app-login:last-child .modal-content">
+        <h5 class="modal-title">Verificación de cuenta</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div
+        class="modal-body"
+        [class.loading]="loading">
+        <div class="row">
+          <div class="col-md-5 d-none d-md-flex">
+            <img
+              src="./assets/rating.png"
+              alt=""
+              class="img-fluid" />
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              @if (user) {
+                <h5>Hola, {{ user.name }}</h5>
+                <div class="small mb-2">
+                  Queremos proteger tu cuenta, ingresa tu contraseña para volver a lo que estabas haciendo.
+                </div>
+                <div class="mb-3">
+                  <a
+                    class="text-primary d-flex align-items-center gap-2"
+                    (click)="user = null">
+                    <i class="bx bx-lock"></i>
+                    Acceder con otra cuenta
+                  </a>
+                </div>
+              } @else {
+                <span>Usuario</span>
+                <div class="input-group mb-3">
+                  <div class="input-group-text">
+                    <i class="bx bx-user"></i>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control form-control-lg"
+                    formControlName="username"
+                    placeholder="Nombre de usuario" />
+                </div>
+              }
+            </div>
+            <div class="form-group">
+              <span>Contraseña</span>
+              <div class="input-group mb-3">
+                <div class="input-group-text">
+                  <i class="bx bx-key"></i>
+                </div>
+                <input
+                  type="{{ show ? 'text' : 'password' }}"
+                  class="form-control form-control-lg"
+                  formControlName="password"
+                  placeholder="Clave de acceso" />
+                <button
+                  class="btn btn-light"
+                  type="button"
+                  (click)="show = !show"
+                  title="Mostrar clave">
+                  <i
+                    class="bx"
+                    [ngClass]="show ? 'bx-hide' : 'bx-show'"></i>
+                </button>
+              </div>
+            </div>
+            @if (message) {
+              <p>{{ message }}</p>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a
+          class="btn btn-link btn-sm text-decoration-none"
+          (click)="close()">
+          Salir del sistema
+        </a>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-pill px-4"
+          [disabled]="form.invalid || loading">
+          Ingresar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

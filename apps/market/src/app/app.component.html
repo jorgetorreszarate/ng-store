@@ -1,0 +1,7 @@
+@if (lb.percent && lb.percent <= 100) {
+  <div
+    class="loading-bar top"
+    [style.width]="lb.percent + '%'"
+    [class.desvaness]="lb.percent === 100"></div>
+}
+<router-outlet></router-outlet>

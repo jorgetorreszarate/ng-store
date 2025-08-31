@@ -1,0 +1,205 @@
+<div
+  class="container"
+  [formGroup]="form">
+  <div class="row">
+    <div class="col">
+      <h4 class="title d-flex justify-content-between align-items-center">
+        Configuración de empresa
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm rounded-pill px-4"
+            (click)="save()"
+            [disabled]="isLoading || form.invalid">
+            <i class="bx bx-save"></i>
+            Guardar
+          </button>
+        </div>
+      </h4>
+      <div
+        class="card card-body p-0 overflow-hidden"
+        [class.loading]="isLoading">
+        <div class="row align-items-stretch">
+          <div class="col-md-9 order-1 order-sm-0">
+            <div class="p-4">
+              <div class="row g-2">
+                <div class="col-md-3 mb-3">
+                  <label class="form-label">Tipo documento</label>
+                  <select
+                    class="form-select"
+                    formControlName="IdTipoDocumento">
+                    <option [value]="6">RUC</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label class="form-label">Nro documento</label>
+                  <div
+                    class="input-group"
+                    [class.loading]="isLoadingDoc"
+                    [class.is-invalid]="form.get('NroDocumento').touched && form.get('NroDocumento').errors">
+                    <input
+                      type="text"
+                      class="form-control border-end-0"
+                      formControlName="NroDocumento" />
+                    <button
+                      type="button"
+                      class="btn border border-start-0"
+                      (click)="searchDocument()">
+                      <i class="bx bx-search-alt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col-md mb-3">
+                  <label class="form-label">Razón social</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="RazonSocial"
+                    [class.is-invalid]="form.get('RazonSocial').touched && form.get('RazonSocial').errors" />
+                </div>
+                <div class="col-md mb-3">
+                  <label class="form-label">Nombre comercial</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="NombreComercial"
+                    [class.is-invalid]="form.get('NombreComercial').touched && form.get('NombreComercial').errors" />
+                </div>
+              </div>
+              <h5 class="subtitle">Datos del establecimiento principal</h5>
+              <app-locations formControlName="Localizacion"></app-locations>
+              <div class="row g-2">
+                <div class="col-md mb-2">
+                  <label class="form-label">Dirección fiscal</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    maxlength="250"
+                    formControlName="Direccion"
+                    [class.is-invalid]="form.get('Direccion').touched && form.get('Direccion').errors" />
+                </div>
+              </div>
+              <h5 class="subtitle">Datos para establecimiento anexo / sucursal</h5>
+              <div class="row g-2">
+                <div class="col-md mb-2">
+                  <label class="form-label">Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    maxlength="250"
+                    formControlName="DireccionSucursal"
+                    [class.is-invalid]="form.get('DireccionSucursal').touched && form.get('DireccionSucursal').errors" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">
+                    Código sucursal
+                    <sup>(1)</sup>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    maxlength="4"
+                    formControlName="CodSucursal"
+                    [class.is-invalid]="form.get('CodSucursal').touched && form.get('CodSucursal').errors" />
+                </div>
+              </div>
+              <div class="text-muted small mb-3">
+                <sup>(1)</sup>
+                En caso de ser una sucursal, especificar el código de la consulta de establecimientos de SUNAT, caso contrario dejar vacio
+              </div>
+              <div class="row g-2">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Email"
+                    maxlength="50" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Teléfono(s)</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="Telefono"
+                    maxlength="250" />
+                </div>
+              </div>
+              <h5 class="subtitle">Información extra</h5>
+              <div class="row">
+                <div class="col">
+                  <label class="form-label">Frase para impresión en comprobantes</label>
+                  <textarea
+                    class="form-control"
+                    rows="2"
+                    maxlength="500"
+                    formControlName="Detalle"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md order-0 order-sm-1"
+            [class.loading]="isLoadingImage">
+            <div class="position-relative h-100 bg-light">
+              <div class="p-3">
+                <div
+                  class="image"
+                  (click)="uploadPicture()"
+                  (dragover)="dragImage($event)"
+                  (drop)="dropImage($event)"
+                  [class.empty]="!logotipo">
+                  <img
+                    [src]="logotipo"
+                    alt="" />
+                  <input
+                    #picture
+                    type="file"
+                    class="d-none"
+                    accept="image/*"
+                    (change)="changePicture($event)" />
+                </div>
+              </div>
+              <div class="px-4">
+                <h5 class="subtitle">Opciones de logotipo</h5>
+              </div>
+              <div class="mt-3 d-flex flex-column">
+                <div
+                  class="btn-custom"
+                  (click)="picture.click()">
+                  <div class="row g-1">
+                    <div class="col-auto">
+                      <i class="bx bx-cloud-upload bx-md me-2"></i>
+                    </div>
+                    <div class="col">
+                      <h6 class="mb-1">Cargar/cambiar imagen</h6>
+                      <div class="small text-muted">Este logotipo saldrá en los documentos impresos</div>
+                    </div>
+                  </div>
+                </div>
+                @if (logotipo) {
+                  <div
+                    class="btn-custom"
+                    (click)="deleteImage()">
+                    <div class="row g-1">
+                      <div class="col-auto">
+                        <i class="bx bx-trash bx-md me-2"></i>
+                      </div>
+                      <div class="col">
+                        <h6 class="mb-1">Eliminar imagen</h6>
+                        <div class="small text-muted">Elimine el logotipo actual</div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.input-wrapper {
+  position: relative;
+
+  .input-currency {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+  }
+
+  .form-control {
+    padding-left: 2rem;
+  }
+}

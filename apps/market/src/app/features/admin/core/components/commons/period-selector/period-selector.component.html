@@ -1,0 +1,99 @@
+<div class="row justify-content-between gap-2">
+  <div class="col-sm-auto">
+    <div class="period flex-column flex-sm-row">
+      <div
+        class="chip"
+        [class.selected]="quick() == 'day'"
+        (click)="setQuickValue('day')">
+        Diario
+      </div>
+      <div
+        class="chip"
+        [class.selected]="quick() == 'week'"
+        (click)="setQuickValue('week')">
+        Semanal
+      </div>
+      <div
+        class="chip"
+        [class.selected]="quick() == 'month'"
+        (click)="setQuickValue('month')">
+        Mensual
+      </div>
+      <div
+        class="chip"
+        [class.selected]="quick() == 'year'"
+        (click)="setQuickValue('year')">
+        Anual
+      </div>
+
+      <div
+        class="chip dropdown-toggle"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="outside"
+        aria-expanded="false"
+        [class.selected]="quick() == 'custom'"
+        (click)="quick.set('custom')">
+        Personalizar
+      </div>
+
+      <div class="dropdown-menu dropdown-menu-sm-start p-0 overflow-hidden">
+        <bs-daterangepicker-inline
+          [bsConfig]="bsConfig"
+          [bsValue]="bsValue"
+          (bsValueChange)="setRangePicker($event)"></bs-daterangepicker-inline>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-auto">
+    <div class="row justify-content-sm-center gap-4 gap-sm-0 mt-3 mt-sm-0">
+      <div class="col-sm-auto d-flex align-items-center justify-content-center gap-2">
+        <ng-content></ng-content>
+      </div>
+
+      @if (quick()) {
+        <div class="col-sm-auto d-flex align-items-center justify-content-center gap-2 mx-sm-3">
+          <i class="bx bx-calendar bx-sm"></i>
+          @if (quick() == "day") {
+            {{ bsValue[0] | date: "dd MMM yyyy" }}
+          } @else if (quick() == "week") {
+            {{ bsValue[0] | date: "dd" }}-{{ bsValue[1] | date: "dd MMM yyyy" }}
+          } @else if (quick() == "month") {
+            {{ bsValue[0] | date: "MMM yyyy" }}
+          } @else if (quick() == "year") {
+            Año {{ bsValue[0] | date: "yyyy" }}
+          } @else if (quick() == "custom") {
+            {{ bsValue[0] | date: "dd MMM yyyy" }} al {{ bsValue[1] | date: "dd MMM yyyy" }}
+          }
+        </div>
+
+        @if (quick() !== "custom") {
+          <div class="col-sm d-none d-sm-flex align-items-center justify-content-center gap-2 period_selector">
+            <i
+              class="bx bx-chevron-left bx-sm"
+              (click)="changePeriod(periods[0])"></i>
+
+            @for (period of periods; track $index; let index = $index) {
+              <span
+                [class.current]="index == 1"
+                (click)="changePeriod(period)">
+                @if (quick() == "day") {
+                  {{ period[0] | date: "dd" }}
+                } @else if (quick() == "week") {
+                  {{ period[0] | date: "dd" }}-{{ period[1] | date: "dd" }}
+                } @else if (quick() == "month") {
+                  {{ period[0] | date: "MMM" }}
+                } @else if (quick() == "year") {
+                  {{ period[0] | date: "yyyy" }}
+                }
+              </span>
+            }
+
+            <i
+              class="bx bx-chevron-right bx-sm"
+              (click)="changePeriod(periods[2])"></i>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>

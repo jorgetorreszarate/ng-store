@@ -1,0 +1,282 @@
+<div
+  class="modal fade"
+  tabindex="-1"
+  aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <form
+      class="modal-content"
+      [formGroup]="form"
+      (submit)="save()">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro de personal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div
+        class="modal-body"
+        [class.loading]="isLoading">
+        <ul
+          class="nav nav-underline"
+          id="myTab"
+          role="tablist">
+          <li
+            class="nav-item"
+            role="presentation">
+            <button
+              class="nav-link"
+              id="general-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#general-tab-pane"
+              type="button"
+              role="tab"
+              aria-controls="general-tab-pane"
+              aria-selected="true"
+              [ngClass]="{active: activeTab === 'general'}"
+              (click)="activeTab = 'general'">
+              Datos personales
+            </button>
+          </li>
+          @if (form.get("personalId").value) {
+            <li
+              class="nav-item"
+              role="presentation">
+              <button
+                class="nav-link"
+                id="users-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#users-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="users-tab-pane"
+                aria-selected="false"
+                [ngClass]="{active: activeTab === 'users'}"
+                (click)="activeTab = 'users'">
+                Usuarios
+              </button>
+            </li>
+          }
+        </ul>
+        <div class="tab-content mt-3">
+          <div
+            class="tab-pane"
+            id="general-tab-pane"
+            role="tabpanel"
+            aria-labelledby="general-tab"
+            tabindex="0"
+            [ngClass]="{'active show': activeTab === 'general'}">
+            <div class="row g-2">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Empresa</label>
+                <div [class.loading]="isLoadingCompanies">
+                  <select
+                    class="form-select form-select-sm"
+                    formControlName="companyId"
+                    [class.is-invalid]="form.get('companyId').touched && form.get('companyId').errors">
+                    @for (item of companies; track item.companyId) {
+                      <option [value]="item.companyId">
+                        {{ item.companyName }}
+                      </option>
+                    }
+                  </select>
+                </div>
+              </div>
+              <div class="col-md mb-3 d-flex justify-content-end align-self-end">
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flagActive"
+                    formControlName="flagActive" />
+                  <label
+                    class="form-check-label"
+                    for="flagActive">
+                    Activo
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Nombres</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="name"
+                  maxlength="250"
+                  [class.is-invalid]="form.get('name').touched && form.get('name').errors" />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Apellido Paterno</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="fatherLastName"
+                  maxlength="250"
+                  [class.is-invalid]="form.get('fatherLastName').touched && form.get('fatherLastName').errors" />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Apellido Materno</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="motherLastName"
+                  maxlength="250"
+                  [class.is-invalid]="form.get('motherLastName').touched && form.get('motherLastName').errors" />
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Documento</label>
+                <div class="row g-1">
+                  <div class="col-auto">
+                    <select
+                      class="form-select form-select-sm"
+                      formControlName="documentTypeId"
+                      [class.is-invalid]="form.get('documentTypeId').touched && form.get('documentTypeId').errors">
+                      <option [value]="1">DNI</option>
+                      <option [value]="2">Carnet extranjería</option>
+                      <option [value]="3">Pasaporte</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control form-control-sm"
+                      formControlName="documentNumber"
+                      maxlength="20"
+                      [class.is-invalid]="form.get('documentNumber').touched && form.get('documentNumber').errors" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Género</label>
+                <select
+                  class="form-select form-select-sm"
+                  formControlName="genre">
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Fecha Nacimiento</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm border-end-0"
+                    bsDatepicker
+                    formControlName="birthDate" />
+                  <div class="input-group-text bg-white border-start-0">
+                    <i class="bx bx-calendar"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-2">
+              <div class="col-md-3 mb-3">
+                <label class="form-label">Celular</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="cellphone"
+                  maxlength="50" />
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="email"
+                  maxlength="250"
+                  [class.is-invalid]="form.get('email').touched && form.get('email').errors" />
+              </div>
+              <div class="col-md-5 mb-3">
+                <label class="form-label">Dirección</label>
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  formControlName="address"
+                  maxlength="250" />
+              </div>
+            </div>
+          </div>
+          <div
+            class="tab-pane"
+            id="users-tab-pane"
+            role="tabpanel"
+            aria-labelledby="users-tab"
+            tabindex="0"
+            [ngClass]="{'active show': activeTab === 'users'}">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="m-0">Lista de usuarios</h6>
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm rounded-pill"
+                (click)="addUser()">
+                Agregar usuario
+              </button>
+            </div>
+
+            <hr />
+            @if (form.get("users").value?.length) {
+              <div class="row align-items-stretch g-2">
+                @for (item of form.get("users").value; track $index; let i = $index) {
+                  <div class="col-md-6 mb-1">
+                    <div class="card card-body h-100 border shadow-sm">
+                      <div class="row">
+                        <div class="col-auto">
+                          <i class="bx bx-user bx-lg"></i>
+                        </div>
+                        <div class="col">
+                          <h5 class="user-name">{{ item.userId }}</h5>
+                          <div class="text-muted">{{ item.userType }}</div>
+                          <div class="mt-2">
+                            <a
+                              class="btn btn-link btn-sm p-0 me-2"
+                              (click)="editUser(item, i)">
+                              Editar
+                            </a>
+                            <a
+                              class="btn btn-link btn-sm p-0"
+                              (click)="removeUser(item, i)">
+                              Eliminar
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="my-4 text-center">No hay usuarios agregados aún</p>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary rounded-pill me-auto"
+          (click)="clear()">
+          Nuevo
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-pill px-3"
+          [disabled]="isLoading">
+          Guardar
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary rounded-pill"
+          (click)="accept()">
+          Salir
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

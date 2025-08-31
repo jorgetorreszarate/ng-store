@@ -1,0 +1,171 @@
+.ps__thumb-x,
+.ps__thumb-x:hover,
+.ps__thumb-y,
+.ps__thumb-y:hover {
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+.ps .ps__rail-x:hover,
+.ps .ps__rail-y:hover,
+.ps .ps__rail-x:focus,
+.ps .ps__rail-y:focus,
+.ps .ps__rail-x.ps--clicking,
+.ps .ps__rail-y.ps--clicking {
+  background: none;
+  opacity: 1;
+}
+
+.swal2-html-container {
+  font-weight: 300 !important;
+}
+
+.swal2-actions button {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  border-radius: 1.5rem !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background: var(--bs-primary) !important;
+}
+
+// ngx-bootstrap datepicker
+// Estilo para datepicker simple (no incluye inline)
+bs-datepicker-container {
+  .bs-datepicker {
+    border: 1px solid #ddd;
+    margin: 3px;
+    border-radius: var(--bs-border-radius);
+  }
+}
+
+.bs-datepicker {
+  box-shadow: none;
+
+  .custom-today {
+    background-color: #f0f0f0;
+  }
+
+  .bs-datepicker-container {
+    padding: 0;
+  }
+
+  .bs-datepicker-head,
+  .bs-datepicker-body {
+    border-radius: 0;
+  }
+
+  // Configuración del tema
+  --bs-datepicker-color: var(--bs-gray-500);
+
+  &.theme-dark-blue {
+    --bs-datepicker-color: var(--bs-primary);
+  }
+
+  &.theme-green {
+    --bs-datepicker-color: var(--bs-success);
+  }
+
+  .bs-datepicker-body table td span.selected,
+  .bs-datepicker-body table td.selected span,
+  .bs-datepicker-body table td span[class*="select-"]:after,
+  .bs-datepicker-body table td[class*="select-"] span:after {
+    background: var(--bs-datepicker-color) !important;
+  }
+
+  .bs-datepicker-head {
+    background: transparent;
+
+    button {
+      color: #000;
+    }
+  }
+
+  .bs-datepicker-body {
+    border: none;
+
+    table {
+      th {
+        color: #000;
+        opacity: 0.7;
+      }
+
+      td {
+        &.week span {
+          color: var(--bs-datepicker-color);
+        }
+      }
+    }
+  }
+
+  .bs-datepicker-buttons {
+    .btn {
+      border-radius: var(--bs-border-radius-pill) !important;
+      font-size: 0.9rem;
+      padding: 0.2rem 1rem;
+    }
+
+    .btn-success,
+    .btn-success:hover,
+    .btn-success:active {
+      background-color: var(--bs-success) !important;
+      border-color: var(--bs-success) !important;
+    }
+  }
+
+  .bs-datepicker-buttons {
+    padding: 10px;
+    border-top: none;
+  }
+
+  .bs-datepicker-predefined-btns {
+    button {
+      border-radius: var(--bs-btn-border-radius);
+      text-align: center;
+
+      &:hover,
+      &:active {
+        color: #fff;
+      }
+
+      &:active {
+        background-color: var(--bs-gray-600);
+      }
+
+      &.selected {
+        background-color: var(--bs-datepicker-color);
+      }
+    }
+  }
+}
+
+// Toastr
+.toast-container {
+  position: fixed;
+  z-index: 99999;
+
+  .ngx-toastr {
+    margin-bottom: 5px;
+  }
+}
+
+.toast-success {
+  background-color: var(--bs-success);
+}
+
+.toast-warning {
+  background-color: var(--bs-orange);
+}
+
+.toast-info {
+  background-color: var(--bs-info);
+}
+
+.toast-error {
+  background-color: var(--bs-danger);
+}
+
+.popover-header {
+  background-color: var(--bs-light);
+  border-bottom: 0;
+}

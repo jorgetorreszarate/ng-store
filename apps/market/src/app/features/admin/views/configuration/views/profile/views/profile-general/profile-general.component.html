@@ -1,0 +1,124 @@
+<div
+  class="card"
+  [class.loading]="isLoading">
+  <div
+    class="card-body"
+    [formGroup]="form">
+    <h5 class="subtitle mt-0">Datos personales</h5>
+    <div class="row g-2">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Nombres</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Nombres"
+          maxlength="250"
+          [class.is-invalid]="form.get('Nombres').touched && form.get('Nombres').errors" />
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Apellido Paterno</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="ApePaterno"
+          maxlength="250"
+          [class.is-invalid]="form.get('ApePaterno').touched && form.get('ApePaterno').errors" />
+      </div>
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Apellido Materno</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="ApeMaterno"
+          maxlength="250"
+          [class.is-invalid]="form.get('ApeMaterno').touched && form.get('ApeMaterno').errors" />
+      </div>
+    </div>
+    <div class="row g-2">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Documento</label>
+        <div class="row g-1">
+          <div class="col-auto">
+            <select
+              class="form-select"
+              formControlName="IdTipoDocumento"
+              [class.is-invalid]="form.get('IdTipoDocumento').touched && form.get('IdTipoDocumento').errors">
+              <option [value]="1">DNI</option>
+              <option [value]="2">Carnet extranjería</option>
+              <option [value]="3">Pasaporte</option>
+            </select>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="NroDocumento"
+              maxlength="20"
+              [class.is-invalid]="form.get('NroDocumento').touched && form.get('NroDocumento').errors" />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label class="form-label">Género</label>
+        <select
+          class="form-select"
+          formControlName="Genero">
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label class="form-label">Fecha Nacimiento</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control border-end-0"
+            bsDatepicker
+            formControlName="FechaNacimiento" />
+          <div class="input-group-text bg-white border-start-0">
+            <i class="bx bx-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5 class="subtitle">Datos de contacto</h5>
+    <div class="row g-2">
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Celular</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Celular"
+          maxlength="50" />
+      </div>
+      <div class="col-md-8 mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Email"
+          maxlength="250" />
+      </div>
+    </div>
+    <div class="row g-2">
+      <div class="col-md-12 mb-3">
+        <label class="form-label">Dirección</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="Direccion"
+          maxlength="250" />
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button
+      type="button"
+      class="btn btn-primary px-4"
+      [disabled]="isLoading"
+      (click)="save()">
+      <i class="bx bx-save"></i>
+      Guardar
+    </button>
+  </div>
+</div>

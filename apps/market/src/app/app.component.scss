@@ -1,0 +1,21 @@
+.loading-bar {
+  background-color: var(--bs-primary);
+  height: 2px;
+  width: 0;
+  position: fixed;
+  z-index: 999999;
+  transition-property: all;
+  transition-duration: 500ms;
+
+  &.no-transition {
+    transition: none;
+  }
+  &.top {
+    left: 0;
+    top: 0;
+  }
+  &.desvaness {
+    transition-duration: 1s;
+    opacity: 0;
+  }
+}

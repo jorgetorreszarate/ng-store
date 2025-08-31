@@ -1,0 +1,77 @@
+<header class="header">
+  <div class="header_left">
+    <div
+      class="header_toggle"
+      (click)="sidebar.toggle()">
+      <i class="bx bx-menu-alt-left"></i>
+    </div>
+    <div
+      class="header_search"
+      [class.open]="searchOpen()"
+      clickOut
+      (outside)="searchOpen.set(false)">
+      <div class="input-search">
+        <input
+          #inputSearch
+          type="text"
+          class="form-control"
+          placeholder="Buscar..."
+          [formControl]="keywords"
+          (click)="searchOpen.set(true)" />
+        <span class="bx bx-search-alt"></span>
+        @if (searchOpen() && keywords.value) {
+          <i
+            class="bx bxs-x-circle"
+            (click)="clear()"></i>
+        }
+      </div>
+      <div [class.d-none]="!searchOpen()">
+        <app-search-bar
+          [keywords]="keywords"
+          (selected)="searchOpen.set(false)" />
+      </div>
+    </div>
+  </div>
+
+  <div class="header_right">
+    <div class="header_avatar">
+      <i
+        class="bx bx-sm me-3"
+        title="Pantalla completa"
+        [ngClass]="isFullScreen() ? 'bx-exit-fullscreen' : 'bx-fullscreen'"
+        (click)="toggleFullscreen()"></i>
+      <a
+        class="dropdown-toggle user-select-none"
+        data-bs-toggle="dropdown">
+        <i class="bx bx-user bx-sm"></i>
+        <span class="mx-1 d-none d-sm-inline-flex">{{ user().nombre }}</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end">
+        @if (user().isAdmin()) {
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="/configuracion/empresa">
+              Configurar sistema
+            </a>
+          </li>
+        }
+        <li>
+          <a
+            class="dropdown-item"
+            routerLink="/configuracion/perfil">
+            Perfil de usuario
+          </a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li>
+          <a
+            class="dropdown-item"
+            (click)="signOut()">
+            Cerrar sesión
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

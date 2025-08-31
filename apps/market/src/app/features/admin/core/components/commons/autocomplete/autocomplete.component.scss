@@ -1,0 +1,85 @@
+.input_wrapper {
+  position: relative;
+
+  .form-select {
+    cursor: default;
+    user-select: none;
+  }
+
+  .content-lazy {
+    position: absolute;
+    z-index: 99;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 0.5rem;
+    border: 1px solid #ced4da;
+    display: flex;
+    flex-direction: column;
+    animation: slideDown ease 0.2s;
+    overflow: hidden;
+
+    .results {
+      position: relative;
+      max-height: 180px;
+      overflow: auto;
+    }
+
+    .option {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      outline: none;
+
+      &:hover,
+      &:focus {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      &.selected {
+        background: var(--bs-primary);
+        color: #fff;
+      }
+
+      &::ng-deep strong {
+        font-weight: 700;
+      }
+    }
+
+    &:empty {
+      padding: 2rem 1rem;
+    }
+
+    &.loading {
+      min-height: 120px;
+    }
+
+    .loading_wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-control:disabled {
+      background-color: transparent;
+    }
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: calc(100% + 5px);
+  }
+}
