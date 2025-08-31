@@ -52,9 +52,11 @@
                       <i
                         class="bx bx-pencil me-1"
                         (click)="edit(user)"></i>
-                      <i
-                        class="bx bx-trash-alt"
-                        (click)="remove(user, i)"></i>
+                      @if (user.flagActive) {
+                        <i
+                          class="bx bx-trash-alt"
+                          (click)="remove(user, i)"></i>
+                      }
                     </div>
                   </td>
                 </tr>

@@ -92,12 +92,14 @@ export class CompanyComponent implements OnInit {
     this.getCompany();
   }
 
-  getCompany(): void {
+  getCompany(): void {    
     this.configurationService.get(this.session.user.companyId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        finalize(() => this.isLoading = false),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe({
         next: res => {
-          this.isLoading = false;
           this.logotipo = res.ImagenUrl;
           this.form.patchValue({
             ...res,
@@ -108,9 +110,6 @@ export class CompanyComponent implements OnInit {
               IdUbigeo: res.IdUbigeo
             },
           });
-        },
-        error: () => {
-          this.isLoading = false;
         }
       });
   }

@@ -72,7 +72,7 @@ export class UserEditComponent implements OnInit {
 
     if (!this.isAdmin) {
       const updateValues = {
-        userId: values.userId,        
+        userId: values.userId,
         password: values.password
       };
 
@@ -91,7 +91,7 @@ export class UserEditComponent implements OnInit {
           }
         },
         error: err => {
-          this.message = err.message;
+          this.message = err.error?.message ?? 'Ha ocurrido un problema';
         }
       });
   }
