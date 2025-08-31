@@ -66,7 +66,7 @@ export class SignInComponent implements OnInit {
         break;
 
       case 'object':
-        message = err?.error?.Message || 'Ocurrió un error inesperado';
+        message = err?.error?.message || 'Ocurrió un error inesperado';
         break;
     }
 

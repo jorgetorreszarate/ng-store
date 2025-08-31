@@ -17,7 +17,7 @@ import { PersonalRegisterComponent } from '../../components/personal-register/pe
 export class PersonalComponent implements OnInit {
   paginationController: any = {};
   keywords: FormControl;
-  users: any[];
+  users: any[] = [];
   isLoading: boolean;
 
   private readonly bsModal = inject(BsModalService);
