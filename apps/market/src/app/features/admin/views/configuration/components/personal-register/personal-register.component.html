@@ -156,7 +156,8 @@
                 <label class="form-label">Género</label>
                 <select
                   class="form-select form-select-sm"
-                  formControlName="genre">
+                  formControlName="genre"
+                  [class.is-invalid]="form.get('genre').touched && form.get('genre').errors">
                   <option value="M">Masculino</option>
                   <option value="F">Femenino</option>
                 </select>

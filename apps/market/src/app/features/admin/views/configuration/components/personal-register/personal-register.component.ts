@@ -56,6 +56,10 @@ export class PersonalRegisterComponent implements OnInit {
       .subscribe({
         next: res => {
           this.companies = res;
+
+          if (!this.user) {
+            this.form.get('companyId').setValue(this.sessionService.user.companyId);
+          }
         }
       });
   }
@@ -93,7 +97,7 @@ export class PersonalRegisterComponent implements OnInit {
       motherLastName: [null, Validators.required],
       documentTypeId: [1, Validators.required],
       documentNumber: [null, Validators.required],
-      genre: null,
+      genre: [null, Validators.required],
       birthDate: null,
       cellphone: null,
       email: [null, Validators.email],
@@ -142,8 +146,11 @@ export class PersonalRegisterComponent implements OnInit {
   }
 
   clear(): void {
+    const values = this.form.value;
+
     this.form.reset({
       personalId: 0,
+      companyId: values.companyId,
       documentTypeId: 1,
       flagActive: true,
       dateAt: new Date(),
